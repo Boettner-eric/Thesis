@@ -3,8 +3,12 @@
 #include <ctype.h>
 #include <string.h>
 
-// static vars and functions are used to restrict acsess to interior AES functions.
-// this header only defines Cipher and Key_expansion (and two helper functions) for direct acsess in other files.  Cipher calls Key_expansion, but Key_expansion is still included for tests.c (verification of key to word changes)
+/* static vars and functions are used to restrict acsess to interior AES functions.
+   this header only defines Cipher and Key_expansion (and two helper functions) for direct acsess in other
+   files.
+   Cipher calls Key_expansion, but Key_expansion is still included for tests.c
+   (verification of key to word changes)
+*/
 
 // see nist (figure 7)
 static const uint8_t sbox[256] = {
@@ -36,7 +40,8 @@ static const uint8_t rcon[11] = {
 #define Nk 4  // key length in words
 #define Nr 10 // number of rounds
 
-#define xtime(x) (((uint8_t)(x)<<1) ^ ((((uint8_t)(x)>>7) & 1) * 0x1b)) //xtime as described by "Efficient Implementations of Cryptographic Algorithms"
+#define xtime(x) (((uint8_t)(x)<<1) ^ ((((uint8_t)(x)>>7) & 1) * 0x1b))
+//xtime as described by "Efficient Implementations of Cryptographic Algorithms"
 
 typedef uint8_t state_t[Nk][Nb];    // a 4x4 byte matrix
 typedef uint8_t word[Nk*Nb*(Nr+1)]; // the expansion of a key

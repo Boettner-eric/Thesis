@@ -33,7 +33,8 @@ void f_1(char c) {
     if (hexb == 'S') {
         printf("Secure Entry (%c)\n [%s]\n%s\n\n(press send)\n", hexb, buffer, error_msg);
     } else {
-        printf("Secure Entry (%c)\n [%.16s]\n [%.16s]\n%s\n\n(press send)\n", hexb, buffer, &buffer[16], error_msg);
+        printf("Secure Entry (%c)\n [%.16s]\n [%.16s]\n%s\n\n(press send)\n", hexb, buffer, \
+            &buffer[16], error_msg);
     }
 };
 
@@ -102,7 +103,8 @@ void f_3(char c) {
 // settings menu
 void f_4(char c){
     screen = 4;
-    printf("Settings\n1 Hex/String (%c)\n2 Keypress/Console (%c) \n3 Change Key\n4 Test AES\n_ Reset EPROM\n", hexb, outb);
+    printf("Settings\n1 Hex/String (%c)\n2 Keypress/Console (%c) \n3 Change Key\n4 Test AES\n_ Reset EPROM\n"\
+        , hexb, outb);
 };
 
 // toggle for Hex/String
@@ -204,7 +206,8 @@ int main() {
         else // any other key
             dispatch[screen][0](c);
         // For the final product this will be called as a callback on new keypress instead of in a loop
-        system("/bin/stty raw");// https://stackoverflow.com/questions/32781937/getting-a-single-character-without-pressing-enter
+        system("/bin/stty raw");
+        // https://stackoverflow.com/questions/32781937/getting-a-single-character-without-pressing-enter
         c = getchar();
         system("/bin/stty cooked");
     }
