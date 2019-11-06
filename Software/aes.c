@@ -30,8 +30,9 @@ void Key_expansion(uint8_t* key, word w) {
         w[j+2] = key[j+2];
         w[j+3] = key[j+3];
     };
-    for (i = 4; i < Nb*(Nr+1); i++) {
-        k = (i - 1) * 4;
+    for (i = Nk; i < Nb*(Nr+1); i++) {
+        // temp = w[i-1]
+        k = (i - 1) * 4; // 4 offset bc this sets k through (k+3)
         temp[0] = w[k];
         temp[1] = w[k+1];
         temp[2] = w[k+2];
@@ -41,7 +42,8 @@ void Key_expansion(uint8_t* key, word w) {
             Sub_word(temp);
             temp[0] ^= rcon[i / Nk];
         };
-        k = (i - Nk) * 4; // starts at 0
+        // w[i] = w[i-Nk] xor temp
+        k = (i - Nk) * 4;
         w[i*4] = w[k] ^ temp[0];
         w[i*4+1] = w[k+1] ^ temp[1];
         w[i*4+2] = w[k+2] ^ temp[2];
