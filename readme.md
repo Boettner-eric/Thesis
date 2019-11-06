@@ -3,7 +3,7 @@
 * A secure input device built in QMK using AES encryption.
 * This keyboard is an attempt to close a large vulnerability in secure text input by encrypting keystrokes before they enter a host operating system.
 
-![Keyboard](/hardware/layout.png)
+![Keyboard](https://github.com/Boettner-eric/Thesis/blob/master/Hardware/layout.png)
 
 ## Features
 * Secure input and local encryption on the keyboard's processor.
