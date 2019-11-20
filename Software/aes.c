@@ -55,7 +55,7 @@ void Key_expansion(uint8_t* key, word w) {
 static void Sub_bytes(state_t state) {
   for (int i=0; i<Nk; i++) {
     for (int j=0; j<Nb; j++) {
-        state[j][i] = sbox[state[j][i]];
+        state[i][j] = sbox[state[i][j]];
     };
   };
 };

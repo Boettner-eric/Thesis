@@ -1,16 +1,19 @@
 CC = gcc
 flags = -Wall -o
+shared = -shared -o
+object = -c -Wall -Werror -fpic
 
-all: test screen
+all: screen test
 
-test: test.c
-	${CC} test.c aes.c ${flags} test
+test: aes.c
+	${CC} ${object} aes.c
+	${CC} ${shared} aes.so aes.o
+	python3 -m unittest -v
 
 screen: screens.c
 	${CC} screens.c aes.c ${flags} screen
 
 clean:
-	rm -f *.out
-	rm test
-	rm screen
-	clear
+	rm -f *.so *.o *.out screen
+	rm -R __pycache__
+	
