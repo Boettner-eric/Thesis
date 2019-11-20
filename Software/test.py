@@ -1,8 +1,6 @@
 import unittest
-import argparse
 from os import stat
 from translate import *
-import sys
 from random import getrandbits
 
 display = False # swap if needed
@@ -45,12 +43,29 @@ class Standard(Test):
         wrd = key_exp(self.key)
         assert bytearray([wrd[i] for i in range(176)]) == overflow, "Key Expansion Failed for sample"
 
-
 class Random(Test):
     __test__ = False
     def setUp(self):
         self.txt = "".join([f"{getrandbits(8):02X}" for _ in range(16)])
         self.key = "".join([f"{getrandbits(8):02X}" for _ in range(16)])
+
+class DeadBeef(Test):
+    __test__ = False
+    def setUp(self):
+        self.txt = "deadbeefdeadbeefdeadbeefdeadbeef"
+        self.key = "deadbeefdeadbeefdeadbeefdeadbeef"
+
+class ZeroOne(Test):
+    __test__ = False
+    def setUp(self):
+        self.txt = "00011100110110101001110011101011"
+        self.key = "11010100100100111010010010010010"
+
+class Sentence(Test):
+    __test__ = False
+    def setUp(self):
+        self.txt = "this is the text".encode('utf-8').hex()
+        self.key = "very complex key".encode('utf-8').hex()
 
 del(Test)
 
