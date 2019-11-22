@@ -43,30 +43,16 @@ def key_exp(key):
     _aes.Key_expansion(key_ptr, wrd)
     return wrd
 
-# prints state matrix
-def print_state(state):
-    res = ["%02x" % b for b in state]
-    for j in range(4):
-        for i in range(4):
-            print(res[i+j*4], end=" ")
-        print("")
-
-def test_diff(state, key, display=False):
+def test_diff(state, key, display=True):
     state_ptr = create_stateptr(state)
     key_ptr = create_keyptr(key)
     _aes.Cipher(state_ptr, key_ptr)
-    x = ""
-    #print(''.join("%02x" % ','.join(map(str, x)) for x in state))
-    for i in range(4): # flip x/y t follow convention
-        for j in range(4):
-            x += f"{(state_ptr)[j][i]:02x}"
-            #print(f"{(state_ptr)[j][i]:02x} ", end="")
-    c_ver = bytearray.fromhex(x)
-    p_ver = P_Cipher(bytes(state), bytes(key))
+    c_ver = "".join(["".join([f"{(state_ptr)[i][j]:02x}" for i in range(4)]) for j in range(4)])
+    p_ver = P_Cipher(bytes(state), bytes(key)).hex()
     if display:
-        print_state(state)
-        print_state(c_ver)
-        print_print(p_ver)
+        print("".join(["".join([f"{(state)[i+4*j]:02x} " for i in range(4)]) + "\n" for j in range(4)]))
+        print(c_ver)
+        print(p_ver)
     return (c_ver, p_ver)
 
-overflow = bytearray(b'+~\x15\x16(\xae\xd2\xa6\xab\xf7\x15\x88\t\xcfO<\xa0\xfa\xfe\x17\x88T,\xb1#\xa399*lv\x05\xf2\xc2\x95\xf2z\x96\xb9CY5\x80zsY\xf6\x7f=\x80G}G\x16\xfe>\x1e#~Dmz\x88;\xefD\xa5A\xa8R[\x7f\xb6q%;\xdb\x0b\xad\x00\xd4\xd1\xc6\xf8|\x83\x9d\x87\xca\xf2\xb8\xbc\x11\xf9\x15\xbcm\x88\xa3z\x11\x0b>\xfd\xdb\xf9\x86A\xca\x00\x93\xfdNT\xf7\x0e__\xc9\xf3\x84\xa6O\xb2N\xa6\xdcO\xea\xd2s!\xb5\x8d\xba\xd21+\xf5`\x7f\x8d)/\xacwf\xf3\x19\xfa\xdc!(\xd1)AW\\\x00n\xd0\x14\xf9\xa8\xc9\xee%\x89\xe1?\x0c\xc8\xb6c\x0c\xa6')
+overflow = '2b7e151628aed2a6abf7158809cf4f3ca0fafe1788542cb123a339392a6c7605f2c295f27a96b9435935807a7359f67f3d80477d4716fe3e1e237e446d7a883bef44a541a8525b7fb671253bdb0bad00d4d1c6f87c839d87caf2b8bc11f915bc6d88a37a110b3efddbf98641ca0093fd4e54f70e5f5fc9f384a64fb24ea6dc4fead27321b58dbad2312bf5607f8d292fac7766f319fadc2128d12941575c006ed014f9a8c9ee2589e13f0cc8b6630ca6'
