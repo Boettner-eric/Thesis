@@ -7,8 +7,6 @@
 * Keymap.c  (a qmk keymap file)
 * aes.c (an implementation of AES in c)
 * aes.h
-* sea.c (AES decryption)
-* sea.h
 * screens.c (a console that mimics the oled of the keyboard)
 * tests.py (testing file for AES verification)
 * Console applications / hid listener
@@ -67,6 +65,9 @@ def test_sample(self):
 * I implemented the examples used by nist to show correctness
 
 ## QMK (in progress)
-* keymap.c will contain all the code necessary to compile a hex file for the Keyboard
-* keymap.c cannot be compiled using the normal Makefile and instead needs to be placed inside the keyboard folder in qmk.
+* Keyboard will be ported to QMK and compilation will follow standard syntax
+* Compilation via:
+```bash
+    make key_crypt:default:dfu-util
+````
 * Further compilation instructions will follow

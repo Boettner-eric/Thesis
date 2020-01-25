@@ -48,8 +48,6 @@ typedef uint8_t word[Nk*Nb*(Nr+1)]; // the expansion of a key
 
 void Key_expansion(uint8_t* key, word w);
 
+void Add_Round_Key(uint8_t round, state_t state, word w);
+
 void Cipher(state_t state, uint8_t* key);
-
-void String_to_bytes(state_t state, char buffer[17]);
-
-uint8_t c_h(char c);

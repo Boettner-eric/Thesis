@@ -3,6 +3,8 @@
 // This file contains a simulation of the onboard screen to visualize and debug
 // screen features and display formatting.
 
+// Helper functions
+
 // prints a state in hex
 static void print_state(state_t state){
     char str[3];
@@ -15,11 +17,32 @@ static void print_state(state_t state){
     printf("\n");
 };
 
-typedef void screen_function(char c);
+// gets rid of offset on charactors (returns them as hex)
+uint8_t c_h(char c) {
+    if (c >= 'a' && c <= 'f') // 10-16
+        return (c - 'a' + 10);
+    else if (c >= 'A' && c <= 'F')
+        return (c - 'A' + 10);
+    else if (c >= '0' && c <= '9')
+        return (c - '0');
+    else
+        return '0'; // don't accept non hex
+};
+
+// takes a string and encodes it into a state in bytes
+void String_to_bytes(state_t state, char buffer[17]) {
+    for (int i=0; i<4; i++){
+        for (int j=0; j<4; j++){
+            state[i][j] = (uint8_t)buffer[i*4+j];
+        }
+    }
+};
+
 /*
     - f_* functions display the current screen
     - other print functions alter logic then call their respective f_* screen
 */
+typedef void screen_function(char c);
 
 // main menu
 void f_0(char c) { // in keymap.c these will be redundant as OLED write handles screen prints

@@ -10,10 +10,11 @@ test: aes.c
 	${CC} ${shared} aes.so aes.o
 	python3 -m unittest -v
 
+
+
 screen: screens.c
 	${CC} screens.c aes.c ${flags} screen
 
 clean:
 	rm -f *.so *.o *.out screen
 	rm -R __pycache__
-	
