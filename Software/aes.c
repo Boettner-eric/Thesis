@@ -9,14 +9,14 @@ static void Rot_word(uint8_t* temp){
         temp[i] = temp[i+1];
     }
     temp[3] = tmp;
-};
+}
 
 // substitutes a four byte sequence with each byte's sbox counterpart
 static void Sub_word(uint8_t* temp){
     for (int i = 0; i < 4; ++i) {
         temp[i] = sbox[temp[i]];
     }
-};
+}
 
 // turns a key into a word following AES key expansion
 void Key_expansion(uint8_t* key, word w) {
@@ -48,7 +48,7 @@ void Key_expansion(uint8_t* key, word w) {
         w[i*4+2] = w[k+2] ^ temp[2];
         w[i*4+3] = w[k+3] ^ temp[3];
     };
-};
+}
 
 // substitutes each byte for its corresponding sbox byte
 static void Sub_bytes(state_t state) {
@@ -57,7 +57,7 @@ static void Sub_bytes(state_t state) {
         state[i][j] = sbox[state[i][j]];
     };
   };
-};
+}
 
 // shifts each row as according to the algorithm
 static void ShiftRows(state_t state) {
@@ -79,7 +79,7 @@ static void ShiftRows(state_t state) {
   state[3][3] = state[3][2];
   state[3][2] = state[3][1];
   state[3][1] = tmp;
-};
+}
 
 // uses xtime macro to do GF(2^8) field multiplication
 static void MixColumns(state_t state) {
@@ -92,7 +92,7 @@ static void MixColumns(state_t state) {
         state[2][i] ^= (xtime(state[2][i] ^ state[3][i])) ^ base;
         state[3][i] ^= (xtime(state[3][i] ^ zero)) ^ base;
     }; // see nist (5.6) for definitions
-};
+}
 
 // XORs each element of the state with a corresponding word
 void Add_Round_Key(uint8_t round, state_t state, word w) {
@@ -101,7 +101,7 @@ void Add_Round_Key(uint8_t round, state_t state, word w) {
               state[i][j] ^= w[(round*16)+(j*Nb)+i];
         }
     }
-};
+}
 
 // AES' defined cipher code
 static void Aes_cipher(state_t state, uint8_t* key) {
@@ -117,8 +117,9 @@ static void Aes_cipher(state_t state, uint8_t* key) {
     Sub_bytes(state);
     ShiftRows(state);
     Add_Round_Key(Nr, state, w);
-};
+}
 
+// Wrapper for Aes_cipher
 void Cipher(state_t state, uint8_t* key) {
     Aes_cipher(state, key);
-};
+}

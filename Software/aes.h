@@ -3,10 +3,10 @@
 #include <ctype.h>
 #include <string.h>
 
+#pragma once
 /* static vars and functions are used to restrict acsess to interior AES functions.
-   this header only defines Cipher and Key_expansion (and two helper functions) for direct acsess in other
-   files.
-   Cipher calls Key_expansion, but Key_expansion is still included for tests.c
+   this header only defines Cipher and Key_expansion for direct acsess in other files.
+   Cipher calls Key_expansion, but Key_expansion is still included for testing
    (verification of key to word changes)
 */
 

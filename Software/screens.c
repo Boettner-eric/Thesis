@@ -15,7 +15,7 @@ static void print_state(state_t state){
       }
     }
     printf("\n");
-};
+}
 
 // gets rid of offset on charactors (returns them as hex)
 uint8_t c_h(char c) {
@@ -27,7 +27,7 @@ uint8_t c_h(char c) {
         return (c - '0');
     else
         return '0'; // don't accept non hex
-};
+}
 
 // takes a string and encodes it into a state in bytes
 void String_to_bytes(state_t state, char buffer[17]) {
@@ -36,7 +36,7 @@ void String_to_bytes(state_t state, char buffer[17]) {
             state[i][j] = (uint8_t)buffer[i*4+j];
         }
     }
-};
+}
 
 /*
     - f_* functions display the current screen
@@ -48,7 +48,7 @@ typedef void screen_function(char c);
 void f_0(char c) { // in keymap.c these will be redundant as OLED write handles screen prints
     screen = 0;
     printf("Menu\n1 Secure Entry\n2 Keyboard\n3 Logo\n4 Settings\n\n");
-};
+}
 
 // secure entry
 void f_1(char c) {
@@ -59,7 +59,7 @@ void f_1(char c) {
         printf("Secure Entry (%c)\n [%.16s]\n [%.16s]\n%s\n\n(press send)\n", hexb, buffer, \
             &buffer[16], error_msg);
     }
-};
+}
 
 // enter case for secure entry
 void snt(char c) {
@@ -76,7 +76,7 @@ void snt(char c) {
     print_state(inputc); // post encryption state
     // this will be sent as presses or a console message instead of being displayed like this
     f_1(c);
-};
+}
 
 // buffer case for secure entry
 void sbf(char c) {
@@ -95,7 +95,7 @@ void sbf(char c) {
         }
     }
     f_1(c);
-};
+}
 
 // keyboard passthrough
 void f_2(char c) {
@@ -105,7 +105,7 @@ void f_2(char c) {
     } else {
         printf("Keyboard\n [\\n : 13]\n\n\n\n(press menu)\n"); // show keycode
     }
-};
+}
 
 // logo passthrough
 void f_3(char c) {
@@ -121,14 +121,14 @@ void f_3(char c) {
     printf("|  `\"\' ___.,\'` j,-\'   |\n");
     printf("|  `-.__.,--\'         |\n");
     printf("+---------------------+\n" RESET);
-};
+}
 
 // settings menu
 void f_4(char c){
     screen = 4;
     printf("Settings\n1 Hex/String (%c)\n2 Keypress/Console (%c) \n3 Change Key\n4 Test AES\n_ Reset EPROM\n"\
         , hexb, outb);
-};
+}
 
 // toggle for Hex/String
 void h_s(char c) {
@@ -138,13 +138,13 @@ void h_s(char c) {
         hexb = 'H';
     }
     f_4(c);
-};
+}
 
 // key change entry
 void f_5(char c) {
     screen = 5;
     printf("Change Key\n [%.16s]\n [%.16s]\n%s\n\n(press send)\n", buffer, &buffer[16], error_msg);
-};
+}
 
 void tst(char c) {
     state_t inputc = {
@@ -163,11 +163,11 @@ void tst(char c) {
     Cipher(inputc, ckey);
     print_state(inputc);
     f_4(c);
-};
+}
 // reset EPROM
 void res(char c) {
     exit(0);
-};
+}
 
 // toggle for output Keypress/Console
 void k_c(char c) {
@@ -177,7 +177,7 @@ void k_c(char c) {
         outb = 'K';
     }
     f_4(c);
-};
+}
 
 // buffer case for key entry
 void kbf(char c) {
@@ -192,7 +192,7 @@ void kbf(char c) {
         }
     }
     f_5(c);
-};
+}
 
 // enter case for key entry
 void knt(char c) {
@@ -201,7 +201,7 @@ void knt(char c) {
     }
     error_msg = BLU "New key set" RESET;
     f_5(c);
-};
+}
 
 screen_function *dispatch[6][6] = {
 //   any   1    2    3    4   ent
@@ -234,4 +234,4 @@ int main() {
         c = getchar();
         system("/bin/stty cooked");
     }
-};
+}
