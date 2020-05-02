@@ -29,15 +29,6 @@ uint8_t c_h(char c) {
         return '0'; // don't accept non hex
 }
 
-// takes a string and encodes it into a state in bytes
-void String_to_bytes(state_t state, char buffer[17]) {
-    for (int i=0; i<4; i++){
-        for (int j=0; j<4; j++){
-            state[i][j] = (uint8_t)buffer[i*4+j];
-        }
-    }
-}
-
 /*
     - f_* functions display the current screen
     - other print functions alter logic then call their respective f_* screen
@@ -74,6 +65,8 @@ void snt(char c) {
     print_state(inputc); // initial state
     Cipher(inputc, ckey);
     print_state(inputc); // post encryption state
+    strcpy(buffer, "");
+    Bytes_to_String(inputc, buffer);
     // this will be sent as presses or a console message instead of being displayed like this
     f_1(c);
 }
@@ -205,7 +198,7 @@ void knt(char c) {
 
 screen_function *dispatch[6][6] = {
 //   any   1    2    3    4   ent
-    {f_0, f_1, f_2, f_3, f_4, f_0}, // main menu
+    {f_0, f_1, f_2, f_3, f_4, tst}, // main menu
     {sbf, sbf, sbf, sbf, sbf, snt}, // secure input
     {f_2, f_2, f_2, f_2, f_2, f_2}, // key passthrough
     {f_3, f_3, f_3, f_3, f_3, f_3}, // logo

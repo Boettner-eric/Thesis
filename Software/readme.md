@@ -12,7 +12,7 @@
 * Console applications / hid listener
 
 ## AES
-* All encryption and decryption is handled in aes.c and sea.c.
+* All encryption and decryption is handled in aes.c
 * Code structure attempts to follow nist conventions and includes all the defined functions used for AES.
 * Key expansion occurs inside of Cipher to streamline encryption for screens.c and keymap.c
 * The header files aes.h and sea.h only contain references to the Cipher wrapper functions and not AES sub-functions for security.

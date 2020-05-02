@@ -1,6 +1,8 @@
 #include "aes.h"
 
 // Adapted from the AES standard documentation and algorithm specification
+// I implemented most of the AES functions from the specification sheet but did use the tiny-AES implementations of
+// MixColumns() and followed tiny-AES' variable naming model and encoding
 
 // shifts all byte indices by one (wraps 3-0)
 static void Rot_word(uint8_t* temp){
@@ -119,6 +121,25 @@ static void Aes_cipher(state_t state, uint8_t* key) {
     Add_Round_Key(Nr, state, w);
 }
 
+// takes a state in bytes and encodes it into a string
+void Bytes_to_String(state_t state, char* bf) {
+    for (int i=0; i<4; i++){
+        for (int j=0; j<4; j++){
+            char buffer[3];
+            sprintf(buffer,"%02X", state[j][i]);
+            strcat(bf, buffer);
+        }
+    }
+}
+
+// takes a string and encodes it into a state in bytes
+void String_to_bytes(state_t state, char buffer[17]) {
+    for (int i=0; i<4; i++){
+        for (int j=0; j<4; j++){
+            state[j][i] = (buffer[i*4+j]);
+        }
+    }
+}
 // Wrapper for Aes_cipher
 void Cipher(state_t state, uint8_t* key) {
     Aes_cipher(state, key);

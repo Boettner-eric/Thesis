@@ -25,6 +25,7 @@ class Test(unittest.TestCase):
     def test_python_circ(self):
         state = P_Cipher(self.txt, self.key)
         invCipher = P_InvCipher(state, self.key)
+        assert invCipher.decode() == self.txt, f"Failed circularity {invCipher} != {self.txt}"
         assert invCipher == str.encode(self.txt), f"Failed circularity {invCipher} != {self.txt}"
 
     # Test circularity (plaintext -> cipher -> plaintext -> cipher -> plaintext) to test for drift errors

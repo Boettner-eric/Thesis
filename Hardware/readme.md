@@ -11,7 +11,7 @@
 * [Adafruit 2.42" Oled display](https://www.adafruit.com/product/2719)
 * [Proton C micro controller](https://keeb.io/collections/frontpage/products/qmk-proton-c)
 * Breadboard
-* 2 feet of colored wires (colored sleeving)
+* 2 feet of colored wire (colored sleeving)
 
 ## Guide
 * As I have not finished the prototype build this section will stay empty while I work out the details

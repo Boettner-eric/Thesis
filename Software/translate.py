@@ -1,4 +1,3 @@
-# TODO: Migrate to makefile before commit
 from ctypes import *
 """Python AES"""
 from Crypto.Cipher import AES
@@ -21,6 +20,11 @@ _aes.Cipher.restype = None
 _aes.Key_expansion.argtypes = ((c_uint8)*16, (c_uint8)*192)
 _aes.Key_expansion.res = None
 
+_aes.Bytes_to_String.argtypes = (POINTER((c_uint8)*4*4), (POINTER(c_char * 32)))
+_aes.Bytes_to_String.res = None
+
+_aes.String_to_bytes.argtypes = (POINTER((c_uint8)*4*4), (POINTER(c_char * 16)))
+_aes.String_to_bytes.res = None
 # creates a c style pointer to a state_t of uint8_t[4][4]
 def create_stateptr(arr):
     ptr = ((c_uint8)*4*4)()
