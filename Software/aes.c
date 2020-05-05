@@ -136,7 +136,7 @@ void Bytes_to_String(state_t state, char* bf) {
 void String_to_bytes(state_t state, char buffer[17]) {
     for (int i=0; i<4; i++){
         for (int j=0; j<4; j++){
-            state[j][i] = (buffer[i*4+j]);
+            state[j][i] = (int) (buffer[i*4+j]);
         }
     }
 }
