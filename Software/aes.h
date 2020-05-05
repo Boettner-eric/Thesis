@@ -51,3 +51,7 @@ void Key_expansion(uint8_t* key, word w);
 void Add_Round_Key(uint8_t round, state_t state, word w);
 
 void Cipher(state_t state, uint8_t* key);
+
+void String_to_bytes(state_t state, char buffer[17]);
+
+void Bytes_to_String(state_t state, char* bf);

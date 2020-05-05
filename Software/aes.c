@@ -120,6 +120,10 @@ static void Aes_cipher(state_t state, uint8_t* key) {
     ShiftRows(state);
     Add_Round_Key(Nr, state, w);
 }
+// Wrapper for Aes_cipher
+void Cipher(state_t state, uint8_t* key) {
+    Aes_cipher(state, key);
+}
 
 // takes a state in bytes and encodes it into a string
 void Bytes_to_String(state_t state, char* bf) {
@@ -139,8 +143,4 @@ void String_to_bytes(state_t state, char buffer[17]) {
             state[j][i] = (int) (buffer[i*4+j]);
         }
     }
-}
-// Wrapper for Aes_cipher
-void Cipher(state_t state, uint8_t* key) {
-    Aes_cipher(state, key);
 }
