@@ -12,7 +12,7 @@ object = -c -Wall -Werror -fpic -Wextra -pedantic -O3
 test: aes.so
 	python3 -m unittest -v
 
-hid_decrypt: aes.so
+demo: aes.so
 	./hid_listen.mac > hid_pipe & python3 demo.py < hid_pipe
 
 screen: screens.o aes.o
