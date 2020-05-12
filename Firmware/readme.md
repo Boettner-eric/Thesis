@@ -18,14 +18,14 @@ Col 3 | A0 | B5 |
 Col 4| B8 | B4 | Enc A
 Col 5 | B13 | B3 | Enc B
 Col 6 | B14 | B2 |
-Col 7 | B15 | B1 | 
+Col 7 | B15 | B1 |
 Col 8 | B9 | B0 | Col 9
 Oled RST | B10 | A4 | Col 10
 Row 1 | B11 | A5 | Col 11
 Row 3 | B12 | A6 | Col 12
 Row 2 | A14 | A7 | Col 13
 Row 4 | A13 | A8 | Col 14
-- | RST | A15 | Row 5
+ | RST | A15 | Row 5
 
 * "-" denotes an unused pin
 
