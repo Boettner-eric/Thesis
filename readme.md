@@ -22,7 +22,10 @@
     * aes.c (an implementation of AES in c)
     * aes.h
     * screens.c (a console that mimics the oled of the keyboard)
-    * tests.c (testing file for AES verification)
+    * screens.h
+    * tests.py (testing file for AES verification)
+    * translate.py
+    * demo.py (simple decryption app)
     * Console applications / hid listeners (in progress)
 * Firmware
     * keymaps/default
