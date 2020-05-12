@@ -8,17 +8,17 @@
 
 Proton C  | | | .
 --- | --- | --- | ---
-- | 5V | A9 | -
-Oled #1 | GND | A10 | -
-- | DFU | GND | -
-Oled #2 | 3.3V | GND | -
+ | 5V | A9 |
+Oled #1 | GND | A10 |
+ | DFU | GND |
+Oled #2 | 3.3V | GND |
 Col 1 | A2| B7 | Oled SDA
 Col 2 | A1 | B6 | Oled SCL
-Col 3 | A0 | B5 | -
+Col 3 | A0 | B5 |
 Col 4| B8 | B4 | Enc A
 Col 5 | B13 | B3 | Enc B
-Col 6 | B14 | B2 | -
-Col 7 | B15 | B1 | -
+Col 6 | B14 | B2 |
+Col 7 | B15 | B1 | 
 Col 8 | B9 | B0 | Col 9
 Oled RST | B10 | A4 | Col 10
 Row 1 | B11 | A5 | Col 11
